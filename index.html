@@ -10,15 +10,18 @@
     <div class="app-container">
         <header>
             <div class="user-info">
-                <img src="avatar.png" class="avatar" alt="Avatar">
-                <div class="lvl-badge">Lvl 1</div>
-            </div>
-            <div class="progress-container">
-                <div class="exp-text">До Lvl 2: 0/100 XP</div>
-                <div class="progress-bar"><div class="progress-fill" style="width: 20%;"></div></div>
+                <div style="position: relative;">
+                    <img src="avatar.png" class="avatar" alt="Avatar">
+                    <div class="lvl-badge">Lvl 1</div>
+                </div>
+                <div class="xp-info">
+                    <div style="font-size: 12px; font-weight: 700;">Lvl 1</div>
+                    <div style="font-size: 10px; color: #aaa;">До Lvl 2: 0/100 XP</div>
+                </div>
             </div>
             <div class="balance-badge">
-                <span id="balance">100</span> <img src="bronze-ticket.png" alt="ticket">
+                <span id="balance">100</span>
+                <img src="ticket.png" alt="ticket">
             </div>
         </header>
 
@@ -26,23 +29,25 @@
             <h1 class="case-title">BRONZE CASE</h1>
             <div class="case-visual">
                 <img src="bronze-case.png" id="main-case" alt="Case">
-                <div class="glow"></div>
             </div>
 
             <div class="actions">
-                <button id="open-btn" class="btn-green">ОТКРЫТЬ <span>50 🎫</span></button>
-                <button id="ads-btn" class="btn-blue">▶ ПОЛУЧИТЬ +10 🎫</button>
+                <button id="open-btn" class="btn-green">
+                    ОТКРЫТЬ <span style="background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 6px; display: flex; align-items: center; gap: 4px;">50 <img src="ticket.png" class="btn-icon"></span>
+                </button>
+                <button id="ads-btn" class="btn-blue">
+                    ▶ ПОЛУЧИТЬ +10 <img src="ticket.png" class="btn-icon">
+                </button>
             </div>
         </main>
 
         <nav>
-            <div class="nav-item active"><span class="icon">🏠</span>ДОМ</div>
-            <div class="nav-item"><span class="icon">🛒</span>МАГАЗИН</div>
-            <div class="nav-item"><span class="icon">👥</span>ДРУЗЬЯ</div>
-            <div class="nav-item"><span class="icon">👤</span>ПРОФИЛЬ</div>
+            <a href="#" class="nav-item active">🏠<span>ДОМ</span></a>
+            <a href="#" class="nav-item">🛒<span>МАГАЗИН</span></a>
+            <a href="#" class="nav-item">👥<span>ДРУЗЬЯ</span></a>
+            <a href="#" class="nav-item">👤<span>ПРОФИЛЬ</span></a>
         </nav>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
