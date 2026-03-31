@@ -1,0 +1,53 @@
+body {
+    background: #0f0f0f;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    margin: 0; padding: 0;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+
+.btn-green {
+    background: linear-gradient(180deg, #78b833 0%, #3e6d1b 100%);
+    border: 1px solid #a3ff47;
+    box-shadow: 0 4px 15px rgba(62, 109, 27, 0.4);
+}
+
+.btn-blue {
+    background: linear-gradient(180deg, #4da1ff 0%, #1a4a8d 100%);
+    border: 1px solid #82bcff;
+    box-shadow: 0 4px 15px rgba(26, 74, 141, 0.4);
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    margin-bottom: 15px;
+    transition: transform 0.1s;
+}
+
+button:active { transform: scale(0.96); }
+
+
+#main-case {
+    width: 280px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
