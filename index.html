@@ -11,53 +11,37 @@
 <div class="app-container">
     <header class="header">
         <div class="user-info">
-            <div class="avatar-container">
-                <div class="lvl-badge">1</div>
-            </div>
-            <div class="user-text">
-                <div class="lvl-text">Lvl 1</div>
-                <div class="xp-text">До Lvl 2: 0/100 XP</div>
+            <div class="avatar-box"><div class="lvl-tag">1</div></div>
+            <div class="user-stats">
+                <div class="lvl-val">Lvl 1</div>
+                <div class="xp-val">0/100 XP</div>
             </div>
         </div>
-        <div class="balance-badge">
-            <span>100 🎫</span>
-        </div>
+        <div class="balance-card">100 🎫</div>
     </header>
 
-    <main class="main-content">
-        <h1 class="case-title">BRONZE CASE</h1>
+    <div class="game-content">
+        <h1 class="gold-title">BRONZE CASE</h1>
         
-        <div class="case-display">
-            <img src="bronze-case.png" id="main-case">
+        <div class="case-zone">
+            <img src="bronze-case.png" class="main-case-img">
         </div>
 
-        <div class="action-area">
-            <button class="btn btn-open">
-                ОТКРЫТЬ <span class="price-tag">50 🎫</span>
+        <div class="buttons-group">
+            <button class="action-btn green-btn">
+                ОТКРЫТЬ <span class="price">50 🎫</span>
             </button>
-            <button class="btn btn-ads">
+            <button class="action-btn blue-btn">
                 ▶ ПОЛУЧИТЬ +10 🎫
             </button>
         </div>
-    </main>
+    </div>
 
-    <nav class="nav-bar">
-        <div class="nav-item active">
-            <span class="nav-icon">🏠</span>
-            <span class="nav-label">ДОМ</span>
-        </div>
-        <div class="nav-item">
-            <span class="nav-icon">🛒</span>
-            <span class="nav-label">МАГАЗИН</span>
-        </div>
-        <div class="nav-item">
-            <span class="nav-icon">👥</span>
-            <span class="nav-label">ДРУЗЬЯ</span>
-        </div>
-        <div class="nav-item">
-            <span class="nav-icon">👤</span>
-            <span class="nav-label">ПРОФИЛЬ</span>
-        </div>
+    <nav class="bottom-nav">
+        <div class="nav-btn active"><span>🏠</span><p>ДОМ</p></div>
+        <div class="nav-btn"><span>🛒</span><p>МАГАЗИН</p></div>
+        <div class="nav-btn"><span>👥</span><p>ДРУЗЬЯ</p></div>
+        <div class="nav-btn"><span>👤</span><p>ПРОФИЛЬ</p></div>
     </nav>
 </div>
 </body>
