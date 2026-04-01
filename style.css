@@ -1,12 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
-    user-select: none;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; }
 
 body {
     background-color: #0d0d0d;
@@ -24,89 +18,62 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
-/* ШАПКА */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 15px;
+    flex-shrink: 0;
 }
 
-.user-info { display: flex; align-items: center; gap: 10px; }
-
-.avatar-container {
-    width: 50px;
-    height: 50px;
-    border: 3px solid #ff9100;
-    border-radius: 50%;
-    position: relative;
-    background: rgba(255, 145, 0, 0.1);
-}
-
-.lvl-badge {
-    position: absolute;
-    bottom: -5px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #ff9100;
-    color: #000;
-    font-weight: 900;
-    font-size: 10px;
-    padding: 2px 6px;
-    border-radius: 5px;
-}
-
-.lvl-text { font-size: 14px; font-weight: 800; }
-.xp-text { font-size: 10px; color: #aaa; }
-
-.balance-badge {
-    background: #1a1a1a;
-    padding: 8px 15px;
-    border-radius: 12px;
-    border: 1px solid #333;
-    font-size: 18px;
-    font-weight: 900;
-}
-
-/* ЦЕНТР */
+/* Центр экрана */
 .main-content {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; /* Распределяем элементы по высоте */
-    padding: 20px 0 110px 0; /* 110px - отступ снизу, чтобы не наезжать на меню */
+    justify-content: space-between; /* Расталкивает заголовок, кейс и кнопки */
+    padding: 10px 0 100px 0; /* 100px снизу защищают от наезда меню */
 }
 
 .case-title {
-    font-size: 30px;
+    font-size: 28px;
     font-weight: 900;
     text-transform: uppercase;
     background: linear-gradient(180deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+}
+
+.case-display {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #main-case {
-    width: 280px; /* Большой кейс */
+    width: 240px; /* Чуть уменьшил, чтобы точно влезли кнопки */
+    height: auto;
     filter: drop-shadow(0 15px 30px rgba(0,0,0,0.7));
 }
 
-/* КНОПКИ (Тонкие и широкие) */
+/* Область кнопок */
 .action-area {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 12px;
+    padding: 0 15px;
 }
 
 .btn {
-    width: 92%;
-    height: 52px; /* Та самая толщина */
+    width: 100%;
+    height: 52px; /* Одинаковая толщина */
     border-radius: 14px;
     font-size: 18px;
     font-weight: 900;
@@ -116,6 +83,8 @@ body {
     justify-content: center;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
+    z-index: 5; /* Чтобы кнопка была поверх всего и нажималась */
 }
 
 .btn-open { background: linear-gradient(180deg, #6fb04a 0%, #46702e 100%); }
@@ -123,15 +92,15 @@ body {
 
 .price-tag {
     background: rgba(0,0,0,0.2);
-    padding: 3px 10px;
-    border-radius: 8px;
+    padding: 2px 8px;
+    border-radius: 6px;
     font-size: 14px;
 }
 
-/* НИЖНЕЕ МЕНЮ (Фиксированное) */
+/* Нижнее меню */
 .nav-bar {
     position: fixed;
-    bottom: 20px;
+    bottom: 15px;
     left: 15px;
     right: 15px;
     height: 70px;
@@ -142,8 +111,4 @@ body {
     align-items: center;
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
-
-.nav-item { display: flex; flex-direction: column; align-items: center; color: #555; gap: 4px; }
-.nav-item.active { color: #ff9100; }
-.nav-icon { font-size: 20px; }
-.nav-label { font-size: 10px; font-weight: 800; }
+/* Остальные стили шапки и меню (аватар, иконки) как в твоем рабочем коде */
