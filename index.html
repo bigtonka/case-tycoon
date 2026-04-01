@@ -10,30 +10,32 @@
 <body>
 <div class="app-container">
     <header class="header">
-        <div class="user-block">
-            <div class="avatar-ring">
+        <div class="user-info">
+            <div class="avatar-container">
                 <div class="lvl-badge">1</div>
             </div>
-            <div class="user-info">
-                <div class="lvl-text">
-                    <h3>Lvl 1</h3>
-                    <p>До Lvl 2: 0/100 XP</p>
-                </div>
+            <div class="user-text">
+                <div class="lvl-text">Lvl 1</div>
+                <div class="xp-text">До Lvl 2: 0/100 XP</div>
             </div>
         </div>
-        <div class="balance-badge">100 🎫</div>
+        <div class="balance-badge">
+            <span>100 🎫</span>
+        </div>
     </header>
 
     <main class="main-content">
-        <h1 class="premium-gold-title">BRONZE CASE</h1>
+        <h1 class="case-title">BRONZE CASE</h1>
         
-        <img src="bronze-case.png" class="huge-case">
+        <div class="case-display">
+            <img src="bronze-case.png" id="main-case">
+        </div>
 
         <div class="action-area">
-            <button class="btn btn-green">
-                ОТКРЫТЬ <span class="price-box">50 🎫</span>
+            <button class="btn btn-open">
+                ОТКРЫТЬ <span class="price-tag">50 🎫</span>
             </button>
-            <button class="btn btn-blue">
+            <button class="btn btn-ads">
                 ▶ ПОЛУЧИТЬ +10 🎫
             </button>
         </div>
