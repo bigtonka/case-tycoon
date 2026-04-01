@@ -8,47 +8,37 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container">
-        <header>
-            <div class="user-info">
-                <div style="position: relative;">
-                    <img src="avatar.png" class="avatar" alt="Avatar">
-                    <div class="lvl-badge">Lvl 1</div>
-                </div>
-                <div class="xp-info">
-                    <div style="font-size: 12px; font-weight: 700;">Lvl 1</div>
-                    <div style="font-size: 10px; color: #aaa;">До Lvl 2: 0/100 XP</div>
-                </div>
-            </div>
-            <div class="balance-badge">
-                <span id="balance">100</span>
-                <img src="ticket.png" alt="ticket">
-            </div>
-        </header>
-
-        <main>
-            <h1 class="case-title">BRONZE CASE</h1>
-            <div class="case-visual">
-                <img src="bronze-case.png" id="main-case" alt="Case">
-            </div>
-
-            <div class="actions">
-                <button id="open-btn" class="btn-green">
-                    ОТКРЫТЬ <span style="background: rgba(0,0,0,0.3); padding: 2px 8px; border-radius: 6px; display: flex; align-items: center; gap: 4px;">50 <img src="ticket.png" class="btn-icon"></span>
-                </button>
-                <button id="ads-btn" class="btn-blue">
-                    ▶ ПОЛУЧИТЬ +10 <img src="ticket.png" class="btn-icon">
-                </button>
-            </div>
-        </main>
-
-        <nav>
-            <a href="#" class="nav-item active">🏠<span>ДОМ</span></a>
-            <a href="#" class="nav-item">🛒<span>МАГАЗИН</span></a>
-            <a href="#" class="nav-item">👥<span>ДРУЗЬЯ</span></a>
-            <a href="#" class="nav-item">👤<span>ПРОФИЛЬ</span></a>
-        </nav>
+<div class="top-nav">
+    <div class="user-block">
+        <div class="avatar-frame active">
+            <span class="add-avatar-text">ДОБАВИТЬ</span>
+        </div>
+        <div class="lvl-badge active">
+            <span id="user-lvl">1</span>
+        </div>
+        <div class="user-info">
+            <h3>Lvl 1</h3>
+            <p>До Lvl 2: <span id="xp-current">0</span>/<span id="xp-needed">100</span> XP</p>
+        </div>
     </div>
+    <div class="balance-block">
+        <span class="balance-value">100</span>
+        <img src="ticket.png" class="balance-icon" alt="Ticket">
+    </div>
+</div>
+
+<main>
+    <h1 class="case-title">BRONZE CASE</h1>
+    <div class="case-visual large"> <img src="bronze-case.png" id="main-case" alt="Case">
+    </div>
+    <div class="actions shifted-up"> <button id="open-btn" class="btn-green large">
+            ОТКРЫТЬ <span class="price-tag">50 <img src="ticket.png" class="btn-icon"></span>
+        </button>
+        <button id="ads-btn" class="btn-blue large">
+            ▶ ПОЛУЧИТЬ +10 <img src="ticket.png" class="btn-icon">
+        </button>
+    </div>
+</main>
     <script src="script.js"></script>
 </body>
 </html>
