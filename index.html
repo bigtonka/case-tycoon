@@ -11,10 +11,8 @@
 <div class="app-container">
         <header class="top-nav">
             <div class="user-block">
-                <div class="avatar-frame active"></div>
-                
-                <div class="lvl-badge active">
-                    <span>1</span>
+                <div class="avatar-ring">
+                    <div class="lvl-badge">1</div>
                 </div>
                 <div class="user-info">
                     <h3>Lvl 1</h3>
@@ -23,47 +21,46 @@
             </div>
             <div class="balance-block">
                 <span class="balance-value">100</span>
-                <img src="ticket.png" class="balance-icon" alt="Ticket">
+                <img src="ticket.png" class="balance-icon large-icon">
             </div>
         </header>
 
         <main class="main-content">
-            <h1 class="case-title">BRONZE CASE</h1>
+            <h1 class="case-title-gold">BRONZE CASE</h1>
             
-            <div class="case-visual large-case">
-                <img src="bronze-case.png" id="main-case" alt="Case">
+            <div class="case-visual-wrapper">
+                <img src="bronze-case.png" id="main-case" class="huge-case">
             </div>
             
-            <div class="actions shifted-up">
-                <button id="open-btn" class="btn-green main-action">
-                    ОТКРЫТЬ <span class="price-tag">50 <img src="ticket.png" class="btn-icon"></span>
+            <div class="actions-container shifted-up">
+                <button id="open-btn" class="btn-green-premium">
+                    ОТКРЫТЬ <span class="price-tag">50 <img src="ticket.png" class="btn-icon large-icon"></span>
                 </button>
-                <button id="ads-btn" class="btn-blue main-action">
-                    ▶ ПОЛУЧИТЬ +10 <img src="ticket.png" class="btn-icon">
+                <button id="ads-btn" class="btn-blue-premium">
+                    ▶ ПОЛУЧИТЬ +10 <img src="ticket.png" class="btn-icon large-icon"></span>
                 </button>
             </div>
         </main>
 
         <nav class="bottom-nav">
             <div class="nav-item active">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png" alt="Home">
-                <span>ДОМ</span>
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/home.png">
+                <span>🏠 ДОМ</span>
             </div>
             <div class="nav-item">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png" alt="Shop">
-                <span>МАГАЗИН</span>
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/shopping-cart.png">
+                <span>🛒 МАГАЗИН</span>
             </div>
             <div class="nav-item">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/group.png" alt="Friends">
-                <span>ДРУЗЬЯ</span>
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/group.png">
+                <span>👥 ДРУЗЬЯ</span>
             </div>
             <div class="nav-item">
-                <img src="https://img.icons8.com/ios-filled/50/ffffff/user-male-circle.png" alt="Profile">
-                <span>ПРОФИЛЬ</span>
+                <img src="https://img.icons8.com/ios-filled/50/ffffff/user-male-circle.png">
+                <span>👤 ПРОФИЛЬ</span>
             </div>
         </nav>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
