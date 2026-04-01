@@ -28,12 +28,13 @@ body {
     position: relative;
 }
 
-/* ШАПКА КАК НА СКРИНЕ 1 */
+/* ШАПКА */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 15px;
+    flex-shrink: 0;
 }
 
 .user-info {
@@ -80,84 +81,93 @@ body {
 .balance-badge span { font-size: 18px; font-weight: 900; }
 .balance-badge img { width: 18px; height: 18px; }
 
-/* ЦЕНТР (ГЛАВНЫЙ ЭКРАН) */
+/* ЦЕНТРАЛЬНАЯ ОБЛАСТЬ */
 .main-content {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around; /* Равномерно распределяет заголовок, кейс и кнопки */
-    padding-bottom: 20px;
+    /* Изменили на flex-end, чтобы управлять кнопками снизу вверх */
+    justify-content: flex-end; 
+    padding-bottom: 110px; /* Общий подъем всей нижней группы (кнопки + кейс) */
 }
 
-/* ТОТ САМЫЙ ЗОЛОТОЙ ЗАГОЛОВОК */
+/* ПРЕМИАЛЬНЫЙ ЗОЛОТОЙ ЗАГОЛОВОК */
 .case-title {
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: 2px;
-    /* Эффект золотого металла */
-    background: linear-gradient(180deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
+    background: linear-gradient(180deg, #FFD700 0%, #FDB931 50%, #9F7928 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
-    margin-top: 20px;
+    filter: drop-shadow(0 2px 8px rgba(253, 185, 49, 0.3));
+    margin-bottom: auto; /* Выталкивает заголовок максимально вверх */
+    padding-top: 20px;
 }
 
+/* КЕЙС */
 .case-display {
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 50px; /* Отступ от кейса до кнопок */
 }
 
 .case-glow {
     position: absolute;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(255, 145, 0, 0.2) 0%, transparent 70%);
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(255, 145, 0, 0.15) 0%, transparent 70%);
     z-index: 0;
 }
 
 #main-case {
-    width: 260px; /* Размер как на первом скрине */
+    width: 280px; 
     z-index: 1;
-    filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+    filter: drop-shadow(0 20px 40px rgba(0,0,0,0.6));
 }
 
-/* КНОПКИ ПРЯМО КАК ВЧЕРА */
+/* КНОПКИ (УЛУЧШЕННЫЕ) */
 .action-area {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 12px; /* Расстояние между зеленой и синей кнопками */
-    margin-bottom: 140px; /* Регулируй это число, чтобы поднять обе кнопки выше */
+    gap: 12px;
+    /* Это значение поднимет кнопки над меню еще выше, если нужно */
+    margin-bottom: 20px; 
 }
 
 .btn {
-    width: 94%; /* Стали чуть шире (было 90%) */
-    height: 54px; /* Фиксированная толщина для обеих кнопок */
-    border-radius: 16px;
-    font-size: 18px;
+    width: 92%; /* Стали чуть шире */
+    height: 52px; /* Идеальная толщина (как у зеленой) */
+    border-radius: 14px;
+    font-size: 17px;
     font-weight: 900;
     text-transform: uppercase;
     border: none;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-    transition: transform 0.1s;
+    gap: 10px;
+    box-shadow: 0 4px 0 rgba(0,0,0,0.2);
+    transition: all 0.1s;
 }
 
-/* Эффект нажатия (чтобы чувствовался клик) */
 .btn:active {
-    transform: scale(0.98);
+    transform: translateY(2px);
+    box-shadow: 0 2px 0 rgba(0,0,0,0.2);
 }
 
-.btn-open { background: linear-gradient(180deg, #6fb04a 0%, #46702e 100%); }
-.btn-ads { background: linear-gradient(180deg, #4a80b0 0%, #2e4a70 100%); }
+.btn-open { 
+    background: linear-gradient(180deg, #76b337 0%, #527e26 100%); 
+}
+
+.btn-ads { 
+    background: linear-gradient(180deg, #4a90e2 0%, #2b5a8f 100%); 
+}
 
 .price-tag {
     background: rgba(0,0,0,0.2);
@@ -165,25 +175,28 @@ body {
     border-radius: 8px;
     display: flex;
     align-items: center;
-    gap: 5px;
-    font-size: 16px;
+    gap: 6px;
 }
 
-.price-tag img, .btn-ads img { width: 14px; height: 14px; }
+.price-tag img, .btn-ads img { 
+    width: 16px; 
+    height: 16px; 
+}
 
-/* НИЖНЕЕ МЕНЮ */
+/* НИЖНЕЕ МЕНЮ (ПАРЯЩЕЕ) */
 .nav-bar {
     position: fixed;
-    bottom: 20px; /* Подняли выше, чтобы не было видно границ и системных кнопок */
-    left: 10px;
-    right: 10px;
-    height: 70px;
-    background: #111; /* Чуть светлее фона, чтобы отделялось */
-    border-radius: 20px; /* Сделаем его "парящим" островком, так красивее */
+    bottom: 25px; /* Поднято выше уровня системных кнопок */
+    left: 15px;
+    right: 15px;
+    height: 75px;
+    background: #151515;
+    border-radius: 22px;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     z-index: 1000;
 }
 
@@ -191,10 +204,10 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #555;
-    gap: 4px;
+    color: #444;
+    gap: 5px;
 }
 
 .nav-item.active { color: #ff9100; }
-.nav-icon { font-size: 20px; }
+.nav-icon { font-size: 22px; }
 .nav-label { font-size: 10px; font-weight: 800; }
