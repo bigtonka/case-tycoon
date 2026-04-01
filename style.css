@@ -92,12 +92,16 @@ body {
 
 /* ТОТ САМЫЙ ЗОЛОТОЙ ЗАГОЛОВОК */
 .case-title {
-    font-size: 28px;
+    font-size: 30px;
     font-weight: 900;
-    color: #ffcc4d; /* Золотистый из 1-го скрина */
-    letter-spacing: 1px;
     text-transform: uppercase;
-    margin-top: 10px;
+    letter-spacing: 2px;
+    /* Эффект золотого металла */
+    background: linear-gradient(180deg, #FFD700 0%, #D4AF37 50%, #B8860B 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    margin-top: 20px;
 }
 
 .case-display {
@@ -128,22 +132,18 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    margin-bottom: 100px; /* Этот отступ поднимает кнопки НАД нижним меню */
+    margin-bottom: 120px; /* Еще выше от нижнего меню */
 }
 
-/* Сами кнопки делаем тоньше */
 .btn {
     width: 90%;
-    height: 52px; /* Было 60-68px, теперь 52px — они станут заметно тоньше и изящнее */
-    border-radius: 14px;
-    font-size: 17px; /* Чуть уменьшили шрифт под новую высоту */
+    height: 48px; /* Сделали еще тоньше (было 52) */
+    border-radius: 12px;
+    font-size: 16px;
     font-weight: 900;
+    text-transform: uppercase;
     border: none;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
 .btn-open { background: linear-gradient(180deg, #6fb04a 0%, #46702e 100%); }
@@ -163,19 +163,18 @@ body {
 
 /* НИЖНЕЕ МЕНЮ */
 .nav-bar {
-    position: fixed; /* Фиксируем строго внизу */
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 75px; /* Немного уменьшили высоту для аккуратности */
-    background: #0d0d0d;
-    border-top: 1px solid #222;
+    position: fixed;
+    bottom: 20px; /* Подняли выше, чтобы не было видно границ и системных кнопок */
+    left: 10px;
+    right: 10px;
+    height: 70px;
+    background: #111; /* Чуть светлее фона, чтобы отделялось */
+    border-radius: 20px; /* Сделаем его "парящим" островком, так красивее */
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-bottom: 15px; /* Отступ от края экрана/кнопок андроида */
+    border: 1px solid rgba(255, 255, 255, 0.05);
     z-index: 1000;
-}
 }
 
 .nav-item {
