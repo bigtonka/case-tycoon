@@ -14,135 +14,165 @@ body {
     overflow: hidden;
 }
 
-/* КОНТЕЙНЕР НА ВЕСЬ ЭКРАН */
 .app-container {
     position: relative;
     width: 100%;
     height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ШАПКА */
 .top-nav {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 110px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 20px 20px 10px 20px;
 }
 
-.user-block { display: flex; align-items: center; gap: 12px; position: relative; }
+.user-block { display: flex; align-items: center; gap: 12px; }
 
-/* ПУСТОЙ КРУЖОК АВАТАРА */
-.avatar-frame {
-    width: 60px;
-    height: 60px;
+/* ПУСТОЙ АВАТАР */
+.avatar-ring {
+    width: 55px;
+    height: 55px;
     border-radius: 50%;
-    border: 2px solid #ff9100;
-    background: rgba(255, 145, 0, 0.1);
-    box-shadow: 0 0 15px rgba(255, 145, 0, 0.3);
+    border: 2.5px solid #ff9100;
+    position: relative;
+    background: rgba(255, 145, 0, 0.05);
 }
 
-.lvl-badge { 
-    position: absolute; 
-    bottom: -5px; 
-    left: 15px; 
-    background: #ff9100; 
-    color: black; 
-    padding: 2px 10px; 
-    border-radius: 5px; 
-    font-size: 10px; 
-    font-weight: 900; 
-}
-.user-info h3 { font-size: 14px; }
-.user-info p { font-size: 10px; color: #888; }
-
-.balance-block { display: flex; align-items: center; background: rgba(255, 255, 255, 0.05); padding: 8px 15px; border-radius: 12px; gap: 8px; border: 1px solid rgba(255, 255, 255, 0.1); }
-.balance-value { font-size: 18px; font-weight: 900; }
-.balance-icon { width: 22px; height: 22px; }
-
-/* ГЛАВНАЯ ЧАСТЬ */
-.main-content {
+.lvl-badge {
     position: absolute;
-    top: 110px; 
-    bottom: 100px; /* Оставили больше места для нижнего меню */
-    left: 0; right: 0;
+    bottom: -6px;
+    left: 50%; /* Цифра ровно посередине под кружком */
+    transform: translateX(-50%);
+    background: #ff9100;
+    color: black;
+    font-weight: 900;
+    font-size: 10px;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.user-info h3 { font-size: 14px; font-weight: 800; }
+.user-info p { font-size: 10px; color: #777; }
+
+.balance-block {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.07);
+    padding: 8px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    gap: 8px;
+}
+
+.balance-value { font-size: 18px; font-weight: 900; }
+
+/* Идеальный размер тикета */
+.balance-icon.large-icon { width: 22px; height: 22px; }
+
+/* ГЛАВНЫЙ КОНТЕНТ */
+.main-content {
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between; 
-    padding: 15px 0;
+    justify-content: space-between;
+    padding: 40px 0 110px 0;
+    position: relative;
 }
 
-.case-title { font-size: 24px; letter-spacing: 2px; font-weight: 900; text-transform: uppercase;}
-
-/* КЕЙС (СДЕЛАЛИ ЕЩЕ БОЛЬШЕ) */
-.case-visual.large-case {
-    position: absolute;
-    top: 48%; /* Чуть выше центра, чтобы сбалансировать поднятые кнопки */
-    left: 50%;
-    transform: translate(-50%, -50%); 
+/* ЗОЛОТАЯ НАДПИСЬ */
+.case-title-gold {
+    font-size: 28px;
+    font-weight: 900;
+    color: #ffcc4d;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    z-index: 2;
 }
 
-.case-visual.large-case img {
-    width: 290px; /* Увеличили размер кейса */
-    filter: drop-shadow(0 0 20px rgba(255, 145, 0, 0.2));
+/* ОЧЕНЬ БОЛЬШОЙ КЕЙС */
+.huge-case {
+    width: 320px; /* Сделали его еще чуть больше */
+    filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
 }
 
-/* КНОПКИ (ПОДНЯЛИ ВЫШЕ И УВЕЛИЧИЛИ ОТСТУП МЕЖДУ НИМИ) */
-.actions.shifted-up {
-    margin-bottom: 40px; /* Сильнее оторвали от нижнего края */
+/* КНОПКИ ДЕЙСТВИЙ (ПОДНЯТЫ ВЫШЕ И РАЗДВИНУТЫ) */
+.actions-container.shifted-up {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px; /* Увеличили расстояние между кнопками */
+    gap: 20px; /* Увеличили расстояние между кнопками */
+    margin-bottom: 30px; /* Подняли выше от нижнего меню */
+    z-index: 2;
 }
 
-.main-action {
+.btn-green-premium, .btn-blue-premium {
     width: 90%;
-    height: 65px; /* Сделали кнопки чуть выше */
-    border-radius: 16px;
-    font-size: 18px;
+    height: 64px;
+    border-radius: 18px;
+    font-size: 19px;
     font-weight: 900;
     border: none;
+    color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
-.btn-green { background: linear-gradient(180deg, #6fb04a 0%, #46702e 100%); color: white; }
-.btn-blue { background: linear-gradient(180deg, #4a80b0 0%, #2e4a70 100%); color: white; }
+.btn-green-premium { background: linear-gradient(180deg, #78b856 0%, #4a7532 100%); }
+.btn-blue-premium { background: linear-gradient(180deg, #518bc9 0%, #32557f 100%); }
 
-.price-tag { background: rgba(0,0,0,0.2); padding: 4px 10px; border-radius: 6px; font-size: 14px; }
-.btn-icon { width: 14px; }
+.price-tag {
+    background: rgba(0,0,0,0.25);
+    padding: 5px 12px;
+    border-radius: 10px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
 
-/* НИЖНЕЕ МЕНЮ (СДЕЛАЛИ ВЫШЕ, ТЕКСТ ЖИРНЕЕ) */
+/* Идеальный размер тикета на кнопке */
+.btn-icon.large-icon { width: 16px; height: 16px; }
+
+/* НИЖНЕЕ МЕНЮ (МАССИВНЕЕ, СМАЙЛИКИ, НОВЫЙ ШРИФТ) */
 .bottom-nav {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 100px; /* Увеличили высоту панели */
+    bottom: 0;
+    width: 100%;
+    height: 100px;
     background: #0d0d0d;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 25px; /* Сильнее приподняли контент меню над нижним краем экрана */
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 25px;
 }
 
-.nav-item { 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    color: #555; 
-    font-size: 11px; /* Сделали текст крупнее */
-    font-weight: 900; /* Сделали текст максимально жирным */
-    letter-spacing: 0.5px;
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: #555;
 }
+
 .nav-item.active { color: #ff9100; }
-.nav-item img { 
-    width: 28px; /* Сделали иконки чуть больше */
-    margin-bottom: 6px; 
+
+.nav-item img {
+    width: 28px;
+    opacity: 0.8;
+}
+
+.nav-item span {
+    font-size: 11px;
+    font-weight: 900; /* Жирный шрифт */
+    letter-spacing: 0.5px;
 }
