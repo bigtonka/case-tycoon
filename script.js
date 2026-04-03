@@ -1,51 +1,52 @@
 let balance = 100;
-let xp = 0;
 
-const balanceEl = document.getElementById('balance');
-const openBtn = document.getElementById('open-btn');
-const adsBtn = document.getElementById('ads-btn');
-const caseImg = document.getElementById('main-case');
+// Предметы, которые видит игрок в рулетке
+const items = [
+    { name: 'iPhone 15 Pro', img: 'iphone.png', rarity: 'mythic' },
+    { name: 'Dyson Airwrap', img: 'dyson.png', rarity: 'mythic' },
+    { name: 'Apple Watch 9', img: 'apple-watch.png', rarity: 'rare' },
+    { name: '100 🎫', img: 'ticket-gold.png', rarity: 'common' },
+    { name: '50 🎫', img: 'ticket-gold.png', rarity: 'common' }
+];
 
-
-openBtn.addEventListener('click', () => {
-    if (balance >= 50) {
-        balance -= 50;
-        updateUI();
-        
-        // Эффект "встряски" при открытии
-        caseImg.style.animation = 'shake 0.5s';
-        setTimeout(() => caseImg.style.animation = 'float 3s ease-in-out infinite', 500);
-
-        // Логика шансов (90% - мусор, 10% - окуп)
-        let rand = Math.random() * 100;
-        if (rand < 90) {
-            alert("Выпало: 10 🥉 (Повезет в следующий раз!)");
-            balance += 10;
-        } else {
-            alert("🔥 ДЖЕКПОТ: 250 🥉!");
-            balance += 250;
-        }
-        updateUI();
-    } else {
-        alert("Недостаточно тикетов! Посмотри рекламу.");
-    }
-});
-
-
-adsBtn.addEventListener('click', () => {
-    adsBtn.innerText = "СМОТРИМ...";
-    adsBtn.disabled = true;
-    
-    setTimeout(() => {
-        balance += 10;
-        updateUI();
-        adsBtn.innerText = "▶ ПОЛУЧИТЬ +10 🎫";
-        adsBtn.disabled = false;
-        alert("Начислено 10 🥉 за просмотр!");
-    }, 2000); // 2 секунды "рекламы"
-});
-
-function updateUI() {
-    balanceEl.innerText = balance;
+function addTicket() {
+    balance += 1;
+    document.getElementById('balance').innerText = balance;
 }
-window.Telegram.WebApp.expand();
+
+function startSpin() {
+    const zone = document.getElementById('display-zone');
+    zone.innerHTML = `
+        <div class="roulette-wrapper">
+            <div class="roulette-line" id="line"></div>
+        </div>
+    `;
+    
+    const line = document.getElementById('line');
+    let tapeContent = "";
+    
+    // Создаем длинную ленту из 80 предметов
+    for(let i=0; i<80; i++) {
+        const item = items[Math.floor(Math.random() * items.length)];
+        // Если это билет и нет картинки, ставим смайлик
+        const imgTag = item.img.includes('.png') ? `<img src="${item.img}">` : `<div style="font-size:40px">🎫</div>`;
+        tapeContent += `<div class="item-card ${item.rarity}">${imgTag}</div>`;
+    }
+    line.innerHTML = tapeContent;
+
+    // Запускаем прокрутку
+    setTimeout(() => {
+        line.style.left = "-7500px"; // Длина прокрутки
+    }, 50);
+
+    // Конец анимации через 5 секунд
+    setTimeout(() => {
+        alert("Почти! Выпало: 50 Билетов 🎫");
+        location.reload(); // Сброс к кейсу
+    }, 5500);
+}
+
+function toggleInfo() {
+    const modal = document.getElementById('info-modal');
+    modal.style.display = (modal.style.display === "block") ? "none" : "block";
+}
