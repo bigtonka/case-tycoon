@@ -1,106 +1,296 @@
+/* Подключаем премиальный шрифт */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap');
 
 * {
-    margin: 0; padding: 0; box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
-    user-select: none; -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    background-color: #0d0d0d; color: white;
-    height: 100vh; width: 100vw; overflow: hidden;
-    display: flex; justify-content: center;
+    background-color: #0d0d0d;
+    color: white;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
 }
 
 .app-container {
-    width: 100%; max-width: 500px; height: 100%;
-    display: flex; flex-direction: column; position: relative;
+    width: 100%;
+    max-width: 500px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
-/* Header */
-.header { display: flex; justify-content: space-between; align-items: center; padding: 20px 15px; }
+/* --- ШАПКА И БАЛАНС --- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 15px;
+    flex-shrink: 0;
+}
 
 .info-btn {
-    width: 38px; height: 38px; border-radius: 50%; border: 2px solid #D4AF37;
-    background: rgba(212, 175, 55, 0.1); color: #D4AF37;
-    font-weight: 900; font-size: 22px; cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #D4AF37;
+    background: rgba(212, 175, 55, 0.1);
+    color: #D4AF37;
+    font-weight: 900;
+    font-size: 22px;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
+
+.info-btn:active { transform: scale(0.9); }
 
 .balance-badge {
-    background: #1a1a1a; padding: 10px 18px; border-radius: 15px;
-    border: 1px solid #333; font-weight: 900; font-size: 18px;
-    display: flex; align-items: center;
+    background: #1a1a1a;
+    padding: 12px 20px;
+    border-radius: 20px;
+    border: 1px solid #333;
+    font-weight: 900;
+    font-size: 24px; /* Увеличили цифры */
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
 }
 
+/* УВЕЛИЧЕННЫЕ ИКОНКИ ДОЛЛАРА */
 .mini-icon {
-    width: 20px; height: 20px; margin-left: 8px; object-fit: contain;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.8));
 }
 
-/* Main */
+.balance-icon {
+    width: 35px; /* Большая иконка в балансе */
+    height: 35px;
+    margin-left: 12px;
+}
+
+.btn-icon {
+    width: 30px; /* Заметная иконка в кнопках */
+    height: 30px;
+    margin-left: 10px;
+}
+
+/* --- ГЛАВНЫЙ ЭКРАН --- */
 .main-content {
-    flex: 1; display: flex; flex-direction: column;
-    align-items: center; justify-content: space-between;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     padding: 10px 15px 40px 15px;
 }
 
 .gold-title {
-    font-size: 32px; font-weight: 900;
+    font-size: 34px;
+    font-weight: 900;
+    text-transform: uppercase;
     background: linear-gradient(180deg, #FFD700 0%, #FDB931 50%, #9F7928 100%);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 2px 10px rgba(253, 185, 49, 0.3));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 15px rgba(253, 185, 49, 0.4));
 }
 
-.display-zone { flex: 1; width: 100%; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.display-zone {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
 
-.main-case-img { width: 85%; max-width: 300px; filter: drop-shadow(0 20px 50px rgba(0,0,0,0.8)); }
+.main-case-img {
+    width: 90%;
+    max-width: 320px;
+    filter: drop-shadow(0 25px 60px rgba(0,0,0,0.9));
+    transition: transform 0.3s ease;
+}
 
-/* Buttons */
-.buttons-group { width: 100%; display: flex; flex-direction: column; gap: 12px; }
+/* --- КНОПКИ --- */
+.buttons-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
 .action-btn {
-    width: 100%; height: 58px; border-radius: 16px; font-weight: 900;
-    font-size: 19px; border: none; color: white;
-    display: flex; justify-content: center; align-items: center; cursor: pointer;
+    width: 100%;
+    height: 70px; /* Сделали кнопки массивнее */
+    border-radius: 20px;
+    font-weight: 900;
+    font-size: 22px;
+    border: none;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    transition: transform 0.1s;
 }
 
-.green-btn { background: linear-gradient(180deg, #6fb04a 0%, #46702e 100%); }
-.blue-btn { background: linear-gradient(180deg, #4a80b0 0%, #2e4a70 100%); }
+.action-btn:active { transform: scale(0.96); }
 
-.price { background: rgba(0,0,0,0.25); padding: 4px 12px; border-radius: 10px; margin-left: 10px; display: flex; align-items: center; }
+.green-btn { background: linear-gradient(180deg, #6fb04a 0%, #3d6128 100%); }
+.blue-btn { background: linear-gradient(180deg, #4a80b0 0%, #253b59 100%); }
 
-/* Roulette */
+.price {
+    background: rgba(0,0,0,0.3);
+    padding: 8px 18px;
+    border-radius: 14px;
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+}
+
+/* --- РУЛЕТКА --- */
 .roulette-wrapper {
-    width: 100vw; height: 150px; background: #111;
-    border-top: 2px solid #D4AF37; border-bottom: 2px solid #D4AF37;
-    position: relative; overflow: hidden; display: flex; align-items: center;
+    width: 100vw;
+    height: 170px;
+    background: #111;
+    border-top: 3px solid #D4AF37;
+    border-bottom: 3px solid #D4AF37;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
 }
 
-.roulette-line { display: flex; position: absolute; left: 0; transition: left 5s cubic-bezier(0.15, 0, 0.15, 1); }
+.roulette-line {
+    display: flex;
+    position: absolute;
+    left: 0;
+    transition: left 5s cubic-bezier(0.15, 0, 0.15, 1);
+}
 
 .item-card {
-    min-width: 130px; height: 130px; display: flex; flex-direction: column;
-    align-items: center; justify-content: center; border-right: 1px solid #222;
+    min-width: 140px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #222;
 }
 
-.item-card img { height: 70px; object-fit: contain; }
+.item-card img {
+    height: 85px;
+    object-fit: contain;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.7));
+}
 
-.item-card p { font-size: 10px; margin-top: 8px; color: #aaa; text-align: center; }
+.item-card p {
+    font-size: 11px;
+    margin-top: 10px;
+    color: #ccc;
+    font-weight: 700;
+}
 
+/* Указатель в центре */
 .roulette-wrapper::after {
-    content: ''; position: absolute; left: 50%; top: 0; transform: translateX(-50%);
-    width: 4px; height: 100%; background: #D4AF37; z-index: 10; box-shadow: 0 0 20px #D4AF37;
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 100%;
+    background: #FFD700;
+    z-index: 10;
+    box-shadow: 0 0 25px #FFD700;
 }
 
-/* Modal */
-.modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 1000; }
-.modal-content {
-    background: #1a1a1a; margin: 10% auto; padding: 25px; width: 90%;
-    max-height: 80vh; border-radius: 25px; border: 1px solid #D4AF37; overflow-y: auto;
+/* --- МОДАЛЬНОЕ ОКНО --- */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.96);
+    z-index: 1000;
 }
-.close-btn { float: right; font-size: 30px; color: #888; cursor: pointer; }
-.loot-list { display: flex; flex-direction: column; gap: 12px; margin-top: 20px; }
-.loot-item { display: flex; align-items: center; gap: 15px; padding: 12px; background: #0d0d0d; border-radius: 15px; }
-.loot-item img { width: 45px; height: 45px; object-fit: contain; }
-.mythic { border: 1px solid #ff4444; }
-.rare { border: 1px solid #4a90e2; }
-.special { border: 1px solid #00ffcc; }
+
+.modal-content {
+    background: #1a1a1a;
+    margin: 8% auto;
+    padding: 30px 20px;
+    width: 90%;
+    max-height: 85vh;
+    border-radius: 30px;
+    border: 2px solid #D4AF37;
+    overflow-y: auto;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 35px;
+    color: #888;
+    cursor: pointer;
+}
+
+.gold-text {
+    color: #D4AF37;
+    font-size: 22px;
+    margin-bottom: 25px;
+    text-align: center;
+    font-weight: 900;
+}
+
+.loot-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.loot-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    background: #0d0d0d;
+    border-radius: 20px;
+    transition: transform 0.2s;
+}
+
+.loot-item img {
+    width: 55px;
+    height: 55px;
+    object-fit: contain;
+}
+
+.loot-item p {
+    font-size: 15px;
+    font-weight: 700;
+    color: #eee;
+}
+
+/* РЕДКОСТЬ */
+.mythic { border-left: 5px solid #ff4444; background: linear-gradient(90deg, rgba(255, 68, 68, 0.1) 0%, transparent 100%); }
+.rare { border-left: 5px solid #4a90e2; background: linear-gradient(90deg, rgba(74, 144, 226, 0.1) 0%, transparent 100%); }
+.special { border-left: 5px solid #00ffcc; background: linear-gradient(90deg, rgba(0, 255, 204, 0.1) 0%, transparent 100%); }
+.common { border-left: 5px solid #555; }
+
+/* Кастомный скроллбар */
+.modal-content::-webkit-scrollbar { width: 6px; }
+.modal-content::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 10px; }
