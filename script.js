@@ -9,10 +9,10 @@ const items = [
     { name: 'MacBook Pro', img: 'macbook.png', rarity: 'mythic' },
     { name: 'iPhone 17', img: 'iphone17.png', rarity: 'rare' },
     { name: 'iPad Pro', img: 'ipad.png', rarity: 'rare' },
-    { name: 'Apple Watch', img: 'applew.png', rarity: 'rare' },
-    { name: 'USDT Crypt', img: 'usdt.png', rarity: 'special' },
+    { name: 'Apple Watch', img: 'applew.png', rarity: 'rare' }, // ТЕПЕРЬ ТУТ
     { name: 'TG Prem (1y)', img: 'tgprem.png', rarity: 'special' },
     { name: 'TG Stars (5k)', img: 'tgstars.png', rarity: 'special' },
+    { name: 'USDT Crypt', img: 'usdt.png', rarity: 'special' },
     { name: 'Cash Pack', img: 'dollar.png', rarity: 'common' }
 ];
 
