@@ -3,7 +3,7 @@ tg.expand(); // Разворачиваем на весь экран
 
 let balance = 100;
 
-// Список предметов по твоим названиям
+// Список предметов
 const items = [
     { name: 'iPhone 17 PM', img: 'iphone17promax.png', rarity: 'mythic' },
     { name: 'MacBook Pro', img: 'macbook.png', rarity: 'mythic' },
@@ -16,14 +16,17 @@ const items = [
     { name: 'Cash Pack', img: 'coin.png', rarity: 'common' }
 ];
 
+// Функция фарма монет
 function addTicketsBatch() {
     balance += 10;
     document.getElementById('balance').innerText = balance;
-    if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+    if (tg.HapticFeedback) {
+        tg.HapticFeedback.impactOccurred('medium');
+    }
 }
 
+// Функция нажатия на "Открыть" (Заблокирована до листинга)
 function startSpin() {
-    // Массив с креативными ответами, чтобы игроку не было скучно
     const messages = [
         "🏦 Хранилище закрыто! Листинг откроет замки. Копи коины!",
         "🚀 Ракета заправляется... Кейсы станут доступны сразу после листинга!",
@@ -32,63 +35,23 @@ function startSpin() {
         "🚧 Идут технические работы по погрузке призов. Ожидай листинг!"
     ];
 
-    // Выбираем случайное сообщение
     const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
-    // Показываем уведомление через Telegram SDK
     if (window.Telegram && window.Telegram.WebApp) {
         window.Telegram.WebApp.showAlert(randomMessage);
-        
-        // Легкая вибрация, типа "ошибка/нельзя"
         if (window.Telegram.WebApp.HapticFeedback) {
             window.Telegram.WebApp.HapticFeedback.notificationOccurred('warning');
         }
     } else {
         alert(randomMessage);
     }
-
-    // Возвращаем false, чтобы рулетка не крутилась
-    return;
 }
 
-    balance -= 100;
-    document.getElementById('balance').innerText = balance;
-
-    const zone = document.getElementById('display-zone');
-    zone.innerHTML = `<div class="roulette-wrapper"><div class="roulette-line" id="line"></div></div>`;
-    
-    const line = document.getElementById('line');
-    let tapeContent = "";
-    
-    // Создаем ленту для прокрутки
-    for(let i=0; i<80; i++) {
-        const item = items[Math.floor(Math.random() * items.length)];
-        tapeContent += `
-            <div class="item-card ${item.rarity}">
-                <img src="${item.img}" onerror="this.src='coin.png'">
-                <p>${item.name}</p>
-            </div>`;
-    }
-    line.innerHTML = tapeContent;
-
-    setTimeout(() => {
-        line.style.left = "-7500px"; 
-    }, 50);
-
-    setTimeout(() => {
-        // Выигрыш всегда 50-70 долларов
-        const winAmount = Math.floor(Math.random() * (70 - 50 + 1)) + 50;
-        tg.showAlert(`Почти! Выпал предмет: Набор Валюты \n\nЗачислено на баланс: ${winAmount} $`);
-        
-        balance += winAmount;
-        document.getElementById('balance').innerText = balance;
-        
-        // Возвращаем кейс
-        zone.innerHTML = '<img src="casetycoon.png" class="main-case-img" id="case-img" alt="Case">';
-    }, 5500);
-}
-
+// Информация о дропе
 function toggleInfo() {
     const modal = document.getElementById('info-modal');
     modal.style.display = (modal.style.display === "block") ? "none" : "block";
+    if (tg.HapticFeedback) {
+        tg.HapticFeedback.impactOccurred('light');
+    }
 }
