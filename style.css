@@ -164,7 +164,6 @@ button.btn-locked::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 0px;
     
     /* Магия позиционирования: */
     margin-left: auto;          /* Толкает кнопку вправо к балансу */
