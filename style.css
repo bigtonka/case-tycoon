@@ -104,7 +104,6 @@ body {
 .mythic { border: 1px solid #ff4444; }
 .rare { border: 1px solid #4a90e2; }
 .special { border: 1px solid #00ffcc; }
-}
 
 /* 1. Монетка: делаем реально большой и заметной */
 .mini-icon {
@@ -150,4 +149,67 @@ button.btn-locked::after {
 /* 4. Эффект нажатия */
 .btn-locked:active {
     transform: scale(0.98);
+}
+/* --- СТИЛИ РЕФЕРАЛЬНОЙ СИСТЕМЫ --- */
+
+.ref-btn {
+    background: #1a1a1a;        /* Цвет как у баланса */
+    padding: 10px 15px;         /* Те же внутренние отступы */
+    border-radius: 15px;        /* То же скругление */
+    border: 1px solid #333;     /* Та же рамка */
+    color: white;
+    font-weight: 900;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* Магия позиционирования: */
+    margin-left: auto;          /* Толкает кнопку вправо к балансу */
+    margin-right: 10px;         /* Зазор между кнопкой и балансом */
+    height: 44px;               /* Фиксированная высота как у баланса */
+    min-width: 50px;
+}
+
+.ref-btn:active {
+    transform: scale(0.95);
+    background: #252525;
+}
+
+/* Стили для внутреннего окна (модалки) рефералов */
+.ref-info-box {
+    background: rgba(255, 215, 0, 0.05);
+    border: 1px dashed #D4AF37;
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.gold-text { color: #FFD700; font-weight: 900; }
+
+.ref-list-container {
+    background: #0d0d0d;
+    border-radius: 15px;
+    padding: 15px;
+    min-height: 100px;
+    margin-top: 10px;
+    border: 1px solid #222;
+}
+
+.ref-list-title { 
+    font-size: 12px; 
+    color: #888; 
+    margin-bottom: 10px; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+}
+
+.empty-list {
+    color: #444;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 20px;
+    font-style: italic;
 }
