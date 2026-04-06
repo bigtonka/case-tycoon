@@ -23,10 +23,33 @@ function addTicketsBatch() {
 }
 
 function startSpin() {
-    if (balance < 100) {
-        tg.showAlert("Недостаточно средств! Нужно 100 $");
-        return;
+    // Массив с креативными ответами, чтобы игроку не было скучно
+    const messages = [
+        "🏦 Хранилище закрыто! Листинг откроет замки. Копи коины!",
+        "🚀 Ракета заправляется... Кейсы станут доступны сразу после листинга!",
+        "💎 Слишком много золота! Таможня задерживает поставку до запуска токена.",
+        "⏳ Терпение, Тайкун! Сейчас время фармить, время открывать придет позже.",
+        "🚧 Идут технические работы по погрузке призов. Ожидай листинг!"
+    ];
+
+    // Выбираем случайное сообщение
+    const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+
+    // Показываем уведомление через Telegram SDK
+    if (window.Telegram && window.Telegram.WebApp) {
+        window.Telegram.WebApp.showAlert(randomMessage);
+        
+        // Легкая вибрация, типа "ошибка/нельзя"
+        if (window.Telegram.WebApp.HapticFeedback) {
+            window.Telegram.WebApp.HapticFeedback.notificationOccurred('warning');
+        }
+    } else {
+        alert(randomMessage);
     }
+
+    // Возвращаем false, чтобы рулетка не крутилась
+    return;
+}
 
     balance -= 100;
     document.getElementById('balance').innerText = balance;
