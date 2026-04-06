@@ -128,7 +128,7 @@ button.btn-locked {
 button.btn-locked::after {
     content: 'ЗАБЛОКИРОВАНО';
     position: absolute;
-    top: 4px;             /* Чуть отступили от верха */
+    top: 2px;             /* Чуть отступили от верха */
     left: 50%;
     transform: translateX(-50%);
     font-size: 7px;       /* Сверх-мелкий размер */
