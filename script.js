@@ -104,4 +104,20 @@ window.addEventListener('DOMContentLoaded', () => {
         document.execCommand("copy"); document.body.removeChild(i);
         if (tg.showAlert) tg.showAlert("✅ Ссылка скопирована!");
     };
+    // --- ЗАЩИТА ОТ КОПИРОВАНИЯ И ЗАЖАТИЯ КАРТИНОК (Android Fix) ---
+document.addEventListener('contextmenu', function(e) {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault(); // Запрещает контекстное меню
+        e.stopPropagation();
+        return false;
+    }
+}, false);
+
+// Запрещаем перетаскивание картинок (чтобы ссылку нельзя было "вытянуть")
+document.addEventListener('dragstart', function(e) {
+    if (e.target.tagName === 'IMG') {
+        e.preventDefault();
+    }
+}, false);
+    
 });
