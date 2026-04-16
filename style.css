@@ -19,6 +19,10 @@ body { background-color: #0d0d0d; color: white; height: 100vh; width: 100vw; ove
     background: linear-gradient(180deg, #FFD700 0%, #FDB931 50%, #9F7928 100%); 
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
     filter: drop-shadow(0 2px 8px rgba(253, 185, 49, 0.3)); 
+
+    /* Добавляем отступ здесь */
+    margin-top: 50px;
+    margin-bottom: 20px;
 }
 
 /* Плашка "Ваше место" теперь в стиле заголовка */
