@@ -93,3 +93,15 @@ img {
     -ms-user-select: none;
     user-select: none;               /* Запрет выделения объекта */
 }
+
+/* Фикс для заголовков внутри окон (Задания, Лидеры и т.д.) */
+.modal-content .gold-title {
+    margin-top: 5px !important;   /* Убираем огромный отступ */
+    margin-bottom: 15px !important;
+    font-size: 24px;              /* Можно чуть уменьшить размер в окнах для компактности */
+}
+
+/* Убираем лишний отступ у самого контейнера модалки, если он есть */
+.modal-content {
+    padding-top: 20px !important;
+}
