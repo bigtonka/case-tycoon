@@ -21,7 +21,7 @@ body { background-color: #0d0d0d; color: white; height: 100vh; width: 100vw; ove
     filter: drop-shadow(0 2px 8px rgba(253, 185, 49, 0.3)); 
 
     /* Добавляем отступ здесь */
-    margin-top: 50px;
+    margin-top: 35px;
     margin-bottom: 20px;
 }
 
@@ -94,14 +94,14 @@ img {
     user-select: none;               /* Запрет выделения объекта */
 }
 
-/* Фикс для заголовков внутри окон (Задания, Лидеры и т.д.) */
+/* Финальный штрих для заголовков внутри окон */
 .modal-content .gold-title {
-    margin-top: 5px !important;   /* Убираем огромный отступ */
-    margin-bottom: 15px !important;
-    font-size: 24px;              /* Можно чуть уменьшить размер в окнах для компактности */
+    margin-top: 25px !important;    /* Расстояние от верха окна до текста */
+    margin-bottom: 30px !important; /* Расстояние от текста до списка заданий/игроков */
+    font-size: 26px;                /* Оптимальный размер для окон */
 }
 
-/* Убираем лишний отступ у самого контейнера модалки, если он есть */
+/* Настройка самой плашки окна */
 .modal-content {
-    padding-top: 20px !important;
+    padding-top: 15px !important; 
 }
