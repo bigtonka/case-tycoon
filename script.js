@@ -2,16 +2,72 @@ window.addEventListener('DOMContentLoaded', () => {
     const tg = window.Telegram.WebApp;
     if (tg) { tg.ready(); tg.expand(); }
 
-    let balance = 100;
+    // --- НАСТРОЙКИ (ВСТАВЬ СВОИ ДАННЫЕ) ---
+    const SUPABASE_URL = 'sb_publishable_eUpDdeZPzc4zJpx37ALgxg_zNnb9O_r';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxmdXl6bWxka3dqaXd2YXh4Y2lyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2MjkyMzYsImV4cCI6MjA5MDIwNTIzNn0.1eR2hatEDe4vPYZc_wSNYtEha1dTmVtlT1onNYzvhDQ';
+    const ADSGRAM_BLOCK_ID = '28176'; // Тот самый ID
 
-    // --- ДОБАВЛЕНИЕ МОНЕТ ---
-    window.addTicketsBatch = function() {
-        balance += 10;
-        document.getElementById('balance').innerText = balance;
-        if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+    const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    let balance = 0;
+
+    // --- ЗАГРУЗКА ИГРОКА ---
+    async function syncData() {
+        const user = tg.initDataUnsafe?.user;
+        if (!user) return;
+
+        let { data: dbUser } = await supabaseClient
+            .from('users')
+            .select('*')
+            .eq('tg_id', user.id)
+            .single();
+
+        if (!dbUser) {
+            const inviterId = tg.initDataUnsafe.start_param ? parseInt(tg.initDataUnsafe.start_param) : null;
+            const { data: newUser } = await supabaseClient
+                .from('users')
+                .insert([{ 
+                    tg_id: user.id, 
+                    username: user.username || 'Игрок', 
+                    balance: 100,
+                    inviter_id: inviterId 
+                }])
+                .select().single();
+            dbUser = newUser;
+        }
+
+        balance = dbUser.balance;
+        document.getElementById('balance').innerText = balance.toLocaleString();
+    }
+
+    syncData();
+
+    // --- РЕКЛАМА (ГЛАВНАЯ ФУНКЦИЯ) ---
+    window.addTicketsBatch = function(event) {
+        const user = tg.initDataUnsafe?.user;
+        if (!user) return;
+
+        const btn = event.currentTarget;
+        btn.disabled = true; // Блокируем кнопку, чтобы не жали сто раз
+
+        // Вызов Adsgram
+        const AdController = window.Adsgram.init({ blockId: ADSGRAM_BLOCK_ID });
+        
+        AdController.show().then(async () => {
+            // Если досмотрел — вызываем твою функцию в базе
+            const { data } = await supabaseClient.rpc('claim_ad_reward', { user_id: user.id });
+            
+            if (data?.success) {
+                await syncData(); // Обновляем баланс на экране
+                if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('medium');
+            }
+            btn.disabled = false;
+        }).catch((err) => {
+            console.error('Реклама не досмотрена или ошибка:', err);
+            btn.disabled = false;
+        });
     };
 
-    // --- ОТКРЫТЬ (ВОЗВРАЩЕНО 5 ФРАЗ) ---
+    // --- ФУНКЦИИ ОКРЫТИЯ (ТВОИ ФРАЗЫ) ---
     window.startSpin = function() {
         const messages = [
             "🏦 Хранилище закрыто! Листинг откроет замки.",
@@ -22,19 +78,19 @@ window.addEventListener('DOMContentLoaded', () => {
         ];
         const msg = messages[Math.floor(Math.random() * messages.length)];
         if (tg.showAlert) tg.showAlert(msg); else alert(msg);
-        if (tg.HapticFeedback) tg.HapticFeedback.notificationOccurred('warning');
     };
 
-    // --- УПРАВЛЕНИЕ ОКНАМИ ---
+    // --- МОДАЛЬНЫЕ ОКНА ---
     function toggleModal(id) {
         const m = document.getElementById(id);
+        if (!m) return;
         const isOpen = m.style.display === "block";
         m.style.display = isOpen ? "none" : "block";
+        
         if (!isOpen) {
             if (id === 'tasks-modal') renderTasks();
             if (id === 'leaderboard-modal') renderLeaderboard();
         }
-        if (tg.HapticFeedback) tg.HapticFeedback.impactOccurred('light');
     }
 
     window.toggleInfo = () => toggleModal('info-modal');
@@ -42,82 +98,38 @@ window.addEventListener('DOMContentLoaded', () => {
     window.toggleTasks = () => toggleModal('tasks-modal');
     window.toggleLeaderboard = () => toggleModal('leaderboard-modal');
 
-    // --- КВЕСТЫ (МОНЕТЫ ВЫРОВНЕНЫ) ---
-    function renderTasks() {
-        const container = document.getElementById('task-list');
-        const tasks = [
-            { n: "Подписка на ТГ канал", r: 500 },
-            { n: "Пригласить 1 друга", r: 300 },
-            { n: "Пригласить 5 друзей", r: 1000 },
-            { n: "Пригласить 10 друзей", r: 2000 },
-            { n: "В игре 3 дня подряд", r: 100 },
-            { n: "В игре 7 дней подряд", r: 500 },
-            { n: "В игре 14 дней подряд", r: 2500 },
-            { n: "Посмотреть 10 реклам", r: 100 },
-            { n: "Посмотреть 50 реклам", r: 500 },
-            { n: "Посмотреть 100 реклам", r: 1000 }
-        ];
-
-        container.innerHTML = tasks.map(t => `
-            <div class="loot-item">
-                <div style="flex:1">
-                    <p style="font-weight:900; font-size:14px;">${t.n}</p>
-                    <p class="gold-text" style="font-size:14px;">+${t.r} <img src="coin.png" class="list-coin"></p>
-                </div>
-                <button class="action-btn blue-btn" style="width:80px; height:30px; font-size:10px" onclick="alert('Проверка...')">ВЫПОЛНИТЬ</button>
-            </div>
-        `).join('');
-    }
-
-    // --- ЛИДЕРБОРД (МОНЕТЫ ВЫРОВНЕНЫ) ---
-    function renderLeaderboard() {
+    // --- ЛИДЕРБОРД (РЕАЛЬНЫЙ) ---
+    async function renderLeaderboard() {
         const container = document.getElementById('leader-list');
-        const tops = [
-            {u: "RichPlayer", b: 250000},
-            {u: "CryptoBoss", b: 180000},
-            {u: "LuckyOne", b: 150000},
-            {u: "Mogul_99", b: 90000},
-            {u: "User_123", b: 85000}
-        ];
+        container.innerHTML = "Загрузка...";
 
-        let html = tops.map((l, i) => `
+        const { data: tops } = await supabaseClient
+            .from('users')
+            .select('username, balance')
+            .order('balance', { ascending: false })
+            .limit(10);
+
+        if (!tops) return;
+
+        container.innerHTML = tops.map((l, i) => `
             <div class="loot-item">
                 <div class="rank-num ${i < 3 ? 'top-' + (i+1) : ''}">${i < 3 ? ['🥇','🥈','🥉'][i] : i+1}</div>
-                <div style="flex:1; font-weight:700; font-size:14px;">${l.u}</div>
-                <div style="font-weight:900; font-size:14px;">${l.b.toLocaleString()} <img src="coin.png" class="list-coin"></div>
+                <div style="flex:1; font-weight:700;">${l.username}</div>
+                <div style="font-weight:900;">${l.balance} 🪙</div>
             </div>
         `).join('');
-        
-        html += `<p style="text-align:center; color:#444; font-size:10px; margin-top:10px;">... и еще 995 игроков ...</p>`;
-        container.innerHTML = html;
-
-        const myPlace = 12450; 
-        let displayRank = myPlace > 1000 ? "1k+" : myPlace;
-        document.getElementById('my-rank').innerText = displayRank;
     }
 
-    // --- КОПИРОВАНИЕ ССЫЛКИ ---
+    // --- РЕФЕРАЛКА ---
     window.copyLink = function() {
-        const link = `https://t.me/CaseTycoon_bot?start=${tg.initDataUnsafe?.user?.id || '0'}`;
+        const userId = tg.initDataUnsafe?.user?.id || '0';
+        const link = `https://t.me/CaseTycoon_bot?start=${userId}`;
         const i = document.createElement("input");
         i.value = link; document.body.appendChild(i); i.select();
         document.execCommand("copy"); document.body.removeChild(i);
-        if (tg.showAlert) tg.showAlert("✅ Ссылка скопирована!");
+        tg.showAlert("✅ Ссылка скопирована!");
     };
-    // --- ЗАЩИТА ОТ КОПИРОВАНИЯ И ЗАЖАТИЯ КАРТИНОК (Android Fix) ---
-document.addEventListener('contextmenu', function(e) {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault(); // Запрещает контекстное меню
-        e.stopPropagation();
-        return false;
-    }
-}, false);
 
-// Запрещаем перетаскивание картинок (чтобы ссылку нельзя было "вытянуть")
-document.addEventListener('dragstart', function(e) {
-    if (e.target.tagName === 'IMG') {
-        e.preventDefault();
-    }
-}, false);
-    
+    // --- ЗАЩИТА ---
+    document.addEventListener('contextmenu', e => e.target.tagName === 'IMG' && e.preventDefault());
 });
